@@ -1,9 +1,11 @@
 # Importando as bibliotecas
-import fitz
-import json
-import re
+import fitz, os, json, re
 
-file = r"C:\Users\carin\OneDrive\Documentos\Willdanthê\Estácio\AnaliseDeDados\Chat2.pdf"
+chats_folder = r"C:\Users\uiui\Documents\GitHub\Python\Estacio\An-liseDeDadosChatBot\Chats"
+
+# Pegando o caminho dos arquivos
+def get_all_files_path(folder):
+    return [os.path.join(folder, file) for file in os.listdir(folder) if file.endswith(".pdf")]
 
 # Extrando Texto do Pdf
 def extract_text(path):
@@ -72,10 +74,6 @@ def Run():
     conversa = extract_text(file)
     conversa_limpa = cleaning_text(conversa)
     
-    print(json.dumps(convert_to_censored_json(conversa_limpa), indent=2, ensure_ascii=False))
-
-    # print(conversa_limpa)
-    # print(type(conversa))
-    
+    print(json.dumps(convert_to_censored_json(conversa_limpa), indent=2, ensure_ascii=False))    
 
 Run()
